@@ -1,5 +1,6 @@
 import React from "react";
 import LandingPage from "@/components/landingPage";
+import LayoutPage from "@/components/layout";
 
 const Home = () => {
   return (
@@ -10,3 +11,7 @@ const Home = () => {
 };
 
 export default Home;
+
+Home.getLayout = function getLayout(page) {
+  return <LayoutPage>{page}</LayoutPage>
+}

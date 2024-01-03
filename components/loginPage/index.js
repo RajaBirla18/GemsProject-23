@@ -2,13 +2,12 @@ import React from "react";
 import HeadPage from "../layout/headPage";
 import HEAD_TITLES from "@/utils/constants/title";
 import styles from "./styles.module.css";
-import { FaLock, FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import { Field, Formik } from "formik";
 import axios from "axios";
 
 import * as yup from "yup";
-import InputField from "../fields/inputField.js";
+import InputField from "../fields/inputField";
 
 const defaultValues = {
   email: "",
@@ -16,15 +15,15 @@ const defaultValues = {
 };
 
 function Login() {
-  const handleFormSubmit = (values) => {
-    axios
+  const handleFormSubmit = async (values) => {
+    await axios
       .post("https://reqres.in/api/login", {
         email: values.email,
         password: values.password,
       })
       .then(function (response) {
         localStorage.setItem("userAuthToken", response.data.token);
-        window.location = "/home";
+        window.location = "/users";
       })
       .catch(function (error) {
         if (error?.response?.status == 400) {
@@ -56,7 +55,7 @@ function Login() {
                   onSubmit={handleFormSubmit}
                   initialValues={defaultValues}
                 >
-                  {({ handleSubmit }) => {
+                  {({ handleSubmit, isSubmitting }) => {
                     return (
                       <Form noValidate onSubmit={handleSubmit}>
                         <div
@@ -96,20 +95,33 @@ function Login() {
 
                             <div className="col-12 mx-auto my-2 mt-4">
                               <Button
+                                disabled={isSubmitting}
                                 type="submit"
-                                className="btn w-100 bg-primary bg-opacity-50 py-3 text-white me-2 mb-4 mb-sm-0"
+                                // variant={isSubmitting ? "secondary" : "primary"}
+                                className={`btn w-100 ${
+                                  isSubmitting ? "bg-secondary" : "bg-primary"
+                                } bg-opacity-50 py-3 text-white me-2 mb-4 mb-sm-0`}
                               >
-                                <FaLock/> Login 
+                                {/* {isSubmitting ? "Submitting..." : "Login >>"} */}
+                                {isSubmitting ? (
+                                  <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">
+                                      Loading...
+                                    </span>
+                                  </Spinner>
+                                ) : (
+                                  "Login"
+                                )}
                               </Button>
                             </div>
 
                             <div className="col-12 mt-4 d-flex justify-content-between">
                               <a href="./index.html">
-                                <FaArrowAltCircleLeft/> back
+                                <i className="fa fa-arrow-left"></i> back
                               </a>
                               <a href="signup.html">
                                 {" "}
-                                Singup <FaArrowAltCircleRight />
+                                Singup <i className="fa fa-arrow-right"></i>
                               </a>
                             </div>
                           </div>
