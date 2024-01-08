@@ -1,16 +1,15 @@
-import React  from "react";
-import Footer from "./footer/footer";
-import Header from "./header/header";
+import React from "react";
+import HeaderPage from "./header/header";
+import FooterPage from "./footer/footer";
 
-
-const LayoutPage = ({children}) => {
-    return(
-        <>
-            <Header />
-            {children}
-            <Footer />
-        </>
-    )
+function LayoutPage({ children }) {
+  return (
+    <>
+      <HeaderPage />
+      {children}
+      <FooterPage />
+    </>
+  );
 }
 
 export default LayoutPage;

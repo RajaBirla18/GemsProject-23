@@ -9,7 +9,6 @@ import {
   NavbarCollapse,
 } from "react-bootstrap";
 
-
 import { BsSearch, BsUiRadiosGrid } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,7 +46,9 @@ function NavbarPage() {
             <Link href="/" className="nav-link">
               Home
             </Link>
-            <Nav.Link href="#pricing">User List</Nav.Link>
+            <Link href="/users" className="nav-link">
+              User List
+            </Link>
             <Nav.Link href="#pricing">Profile</Nav.Link>
           </Nav>
 

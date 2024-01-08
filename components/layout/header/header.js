@@ -1,14 +1,10 @@
-import Navbar from "../navbar/navbar";
-// import Footer from "../footer/footer";
 import React from 'react'
+import NavbarPage from '../navbar/navbar'
 
-function Header() {
+export default function HeaderPage() {
   return (
-    <div>
-      <Navbar />
-      {/* <Footer /> */}
-    </div>
+    <header className="navbar-light navbar-sticky header-static">
+      <NavbarPage/>
+    </header>
   )
 }
-
-export default Header

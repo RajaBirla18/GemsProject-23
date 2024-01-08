@@ -1,17 +1,13 @@
-import React from "react";
 import LandingPage from "@/components/landingPage";
 import LayoutPage from "@/components/layout";
+import React from "react";
 
-const Home = () => {
-  return (
-    <center>
-      <LandingPage />
-    </center>
-  );
+function Home() {
+  return <LandingPage />;
+}
+
+Home.getLayout = function getLayout(page) {
+  return <LayoutPage>{page}</LayoutPage>;
 };
 
 export default Home;
-
-Home.getLayout = function getLayout(page) {
-  return <LayoutPage>{page}</LayoutPage>
-}
