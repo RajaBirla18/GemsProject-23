@@ -69,10 +69,10 @@ function NavbarPage() {
           </div>
 
           <Nav>
-            <Link href="/signup" className="nav-link">
+            <Link href="./signUp" className="nav-link">
               Signup
             </Link>
-            <Link href="/login" className="nav-link">
+            <Link href="./login" className="nav-link">
               Login
             </Link>
           </Nav>

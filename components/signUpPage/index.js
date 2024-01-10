@@ -1,28 +1,27 @@
 import React from "react";
-import HeadPage from "../layout/headPage";
-import HEAD_TITLES from "@/utils/constants/title";
-import styles from "./styles.module.css";
-import { Button, Form, Spinner } from "react-bootstrap";
-import { Field, Formik } from "formik";
-import axios from "axios";
-import { useRouter } from "next/router";
-
+import Link from "next/link";
 import * as yup from "yup";
+import HEAD_TITLES from "../layout/headPage";
+import HeadPage from "../layout/headPage";
+import { Field, Formik } from "formik";
+import { useRouter } from "next/router";
+import { Button, Form, Spinner } from "react-bootstrap";
+import styles from "../loginPage/styles.module.css";
 import InputField from "../fields/inputField";
 import { loginService } from "@/services/authServices";
-
 const defaultValues = {
   email: "",
   password: "",
 };
 
-function Login() {
+function SignupPage() {
   const router = useRouter();
 
   const handleFormSubmit = async (values) => {
     const res = await loginService({
       password: values.password,
       email: values.email,
+      confirmPassword : values.confirmPassword
     });
 
     if (res.success) {
@@ -31,27 +30,19 @@ function Login() {
     } else {
       alert(res.message);
     }
-    // await axios
-    //   .post("https://reqres.in/api/login", {
-    //     email: values.email,
-    //     password: values.password,
-    //   })
-    //   .then(function (response) {
-    //     localStorage.setItem("userAuthToken", response.data.token);
-    //     window.location = "/users";
-    //   })
-    //   .catch(function (error) {
-    //     if (error?.response?.status == 400) {
-    //       alert(error.response?.data?.error);
-    //     } else {
-    //       alert(error.message);
-    //     }
-    //   });
   };
 
   const validationSchema = yup.object().shape({
     email: yup.string().required().email(),
     password: yup.string().required().min(6).max(20),
+    confirmPassword: yup
+    .string()
+    .required('Please confirm your password')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    // confirmPassword: yup
+    //   .string()
+    //   .required("confirm Password")
+    //   .oneOf([yup.ref("password"), null], "please confirm password"),
     // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
   });
 
@@ -63,8 +54,8 @@ function Login() {
             <div className="row d-flex justify-content-center mt-3">
               <div className="col-lg-5 col-md-7 col-12">
                 {/* <Alert key="danger" variant="danger">
-                  This is a alert—check it out!
-                </Alert> */}
+                    This is a alert—check it out!
+                  </Alert> */}
                 <Formik
                   validationSchema={validationSchema}
                   onSubmit={handleFormSubmit}
@@ -81,7 +72,7 @@ function Login() {
                               <h2
                                 className={`${styles.contactFormHeading} text-center`}
                               >
-                                Login Page
+                                SingUp Page
                               </h2>
                               <p
                                 className={`${styles.contactFormParagh} text-center text-dark`}
@@ -108,6 +99,28 @@ function Login() {
                               />
                             </div>
 
+                            <div className="col-12 my-2">
+                              <Field
+                                type="password"
+                                name="confirmPassword"
+                                label=" confirmPassword"
+                                placeholder="Confirm your password"
+                                component={InputField}
+                              />
+                            </div>
+                            <div className="col-12 my-2">
+                              <Form.Group
+                                className="mb-3"
+                                controlId="formBasicCheckBox"
+                              >
+                                <Form.Check
+                                  type="checkBox"
+                                  name="term"
+                                  label="I accept the terms and conditions"
+                                />
+                              </Form.Group>
+                            </div>
+
                             <div className="col-12 mx-auto my-2 mt-4">
                               <Button
                                 disabled={isSubmitting}
@@ -125,18 +138,18 @@ function Login() {
                                     </span>
                                   </Spinner>
                                 ) : (
-                                  "Login"
+                                  "SignUp"
                                 )}
                               </Button>
                             </div>
 
                             <div className="col-12 mt-4 d-flex justify-content-between">
                               <a href="/">
-                                <i className="fa fa-arrow-left"></i> Back
+                                <i className="fa fa-arrow-left"></i> back
                               </a>
-                              <a href="./signUp">
+                              <a href="./login">
                                 {" "}
-                                Singup <i className="fa fa-arrow-right"></i>
+                                Login <i className="fa fa-arrow-right"></i>
                               </a>
                             </div>
                           </div>
@@ -153,5 +166,4 @@ function Login() {
     </>
   );
 }
-
-export default Login;
+export default SignupPage;

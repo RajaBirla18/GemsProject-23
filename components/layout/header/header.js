@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarPage from '../navbar/navbar'
+import NavbarPage from '../navbar'
 
 export default function HeaderPage() {
   return (
