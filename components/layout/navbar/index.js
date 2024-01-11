@@ -49,6 +49,12 @@ function NavbarPage() {
             <Link href="/users" className="nav-link">
               User List
             </Link>
+            <Link href="/sum" className="nav-link">
+              Sum
+            </Link>
+            <Link href="/digit" className="nav-link">
+              Digit
+            </Link>
             <Nav.Link href="#pricing">Profile</Nav.Link>
           </Nav>
 

@@ -136,7 +136,7 @@ function Login() {
                               </a>
                               <a href="./signUp">
                                 {" "}
-                                Singup <i className="fa fa-arrow-right"></i>
+                                SingUp <i className="fa fa-arrow-right"></i>
                               </a>
                             </div>
                           </div>

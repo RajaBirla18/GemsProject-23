@@ -21,7 +21,7 @@ function SignupPage() {
     const res = await loginService({
       password: values.password,
       email: values.email,
-      confirmPassword : values.confirmPassword
+      confirmPassword: values.confirmPassword,
     });
 
     if (res.success) {
@@ -36,9 +36,9 @@ function SignupPage() {
     email: yup.string().required().email(),
     password: yup.string().required().min(6).max(20),
     confirmPassword: yup
-    .string()
-    .required('Please confirm your password')
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+      .string()
+      .required("Please confirm your password")
+      .oneOf([yup.ref("password"), null], "Passwords must match"),
     // confirmPassword: yup
     //   .string()
     //   .required("confirm Password")
@@ -145,7 +145,7 @@ function SignupPage() {
 
                             <div className="col-12 mt-4 d-flex justify-content-between">
                               <a href="/">
-                                <i className="fa fa-arrow-left"></i> back
+                                <i className="fa fa-arrow-left"></i> Back
                               </a>
                               <a href="./login">
                                 {" "}
