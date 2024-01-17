@@ -5,7 +5,7 @@ export const sumSlice = createSlice({
     name:"Sum",
     initialState : {sumData: 0},
     reducers:{
-        increment: (state) => {
+        increment: (state, action) => {
             console.log("====state===", state.sumData);
             state.sumData += 1;
         },

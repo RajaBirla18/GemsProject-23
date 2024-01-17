@@ -107,6 +107,7 @@ function SignupPage() {
                                 placeholder="Confirm your password"
                                 component={InputField}
                               />
+                            
                             </div>
                             <div className="col-12 my-2">
                               <Form.Group

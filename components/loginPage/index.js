@@ -4,12 +4,12 @@ import HEAD_TITLES from "@/utils/constants/title";
 import styles from "./styles.module.css";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { Field, Formik } from "formik";
-import axios from "axios";
 import { useRouter } from "next/router";
-
 import * as yup from "yup";
 import InputField from "../fields/inputField";
 import { loginService } from "@/services/authServices";
+// import axios from "axios";
+
 
 const defaultValues = {
   email: "",
