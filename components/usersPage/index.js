@@ -1,22 +1,23 @@
-// import Image from "next/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import User from "./user";
 import { loadData } from "@/reducers/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import MyPagination from "./myPagination";
+// import MyPagination from "./myPaginations";
+import NextButton from "./nextButton";
 
 function UsersPage() {
-  const [usersData, setUsersData] = useState([]);
   const dispatch = useDispatch();
   const userObj = useSelector((state) => state.users);
 
-  const getUsersData = () => {
+  console.log("===userObj===", userObj);
+
+  const getUsersData = ({page}) => {
     axios
       .get("https://reqres.in/api/users", {
         params: {
-          page: 1,
+          page: page,
         },
       })
       .then(function (res) {
@@ -33,7 +34,7 @@ function UsersPage() {
   };
 
   useEffect(() => {
-    getUsersData();
+    getUsersData({ page: 1 });
   }, []);
 
   return (
@@ -56,8 +57,9 @@ function UsersPage() {
             </div>
           </div>
         </div>
-        <MyPagination
+        <NextButton
           totalPages={userObj.totalPages}
+          getUsersData={getUsersData}
           currentPage={userObj.currentPage}
         />
       </div>
@@ -66,3 +68,9 @@ function UsersPage() {
 }
 
 export default UsersPage;
+
+{/* <MyPagination
+  totalPages={userObj.totalPages}
+  currentPage={userObj.currentPage}
+  getUsersData={getUsersData}
+/> */}

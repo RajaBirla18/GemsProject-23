@@ -2,12 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const usersSlice = createSlice({
   name: "userSlice",
-  initialState: { data: [], totalPages: 0, currentPage: 1 },
+  initialState: { data: [], totalPages: 0, currentPage: 1, testPage: 100, myPage: 99},
   reducers: {
+    
     loadData: (state, action) => {
-      state.data = action.payload.data;
+      // debugger
+      if (action.payload.page == 1) {
+        state.data = action.payload.data;
+      } else {
+        state.data = [...state.data, ...action.payload.data];
+      }
       state.totalPages = action.payload.total_pages;
-      state.currentPage = action.payload.currentPage;
+      state.currentPage = action.payload.page;
     },
   },
 });

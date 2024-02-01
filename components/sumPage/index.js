@@ -5,9 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SumPage = ({ page }) => {
   const allData = useSelector((state) => state.sumRedu);
+  const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  console.log("===allData=====", allData);
+  console.log("===Sum Page user data=====", users);
 
   // const handleClick = (num) => {
   //   dispatch(increment());
